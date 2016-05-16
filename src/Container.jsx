@@ -27,11 +27,13 @@ class Container extends Component {
     const {
       items,
       parentPosition,
-      childrenProperty
+      childrenProperty,
+      childrenStyle,
+      topLevel
     } = this.props;
 
     return (
-      <ol>
+      <ol style={ topLevel ? {} : childrenStyle }>
         { items.map((item, i) => {
           const position = parentPosition.concat([i]);
           const children = item[childrenProperty];
@@ -51,6 +53,7 @@ class Container extends Component {
                     items={ children }
                     parentPosition={ position }
                     childrenProperty={ childrenProperty }
+                    childrenStyle={ childrenStyle }
                   />
                 : null
               }

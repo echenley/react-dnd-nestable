@@ -14,12 +14,10 @@ class Demo extends Component {
     ]
   };
 
-  renderItem = ({ item, depth }) => {
+  renderItem = ({ item }) => {
     return (
-      <div style={ depth > 1 ? styles.nested : {} }>
-        <div style={ styles.item }>
-          { item.id }
-        </div>
+      <div style={ styles.item }>
+        { item.id }
       </div>
     );
   };
@@ -34,6 +32,7 @@ class Demo extends Component {
         items={ this.state.items }
         renderItem={ this.renderItem }
         onUpdate={ this.updateItems }
+        childrenStyle={ styles.children }
         maxDepth={ 3 }
       />
     );
@@ -47,7 +46,7 @@ var styles = {
     border: '1px solid #000',
     background: '#fff'
   },
-  nested: {
+  children: {
     marginLeft: 30
   }
 };

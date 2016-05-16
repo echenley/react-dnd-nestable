@@ -55,6 +55,7 @@ class Nestable extends Component {
   static defaultProps = {
     items: [],
     childrenProperty: 'children',
+    childrenStyle: {},
     onUpdate: () => {},
     renderItem: () => { throw new Error('Nestable: You must supply a renderItem prop.'); },
     useDragHandle: false,
@@ -138,18 +139,16 @@ class Nestable extends Component {
 
   render() {
     const { items } = this.state;
-    const { renderItem, childrenProperty, useDragHandle } = this.props;
+    const { renderItem, childrenProperty, childrenStyle } = this.props;
 
     return (
       <div>
         <Container
           items={ items }
-          moveItem={ this.moveItem }
-          dropItem={ this.dropItem }
-          renderItem={ renderItem }
           parentPosition={ [] }
           childrenProperty={ childrenProperty }
-          useDragHandle={ useDragHandle }
+          childrenStyle={ childrenStyle }
+          topLevel={ true }
         />
         <CustomDragLayer
           renderItem={ renderItem }
