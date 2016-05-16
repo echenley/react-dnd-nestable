@@ -39,7 +39,8 @@ var styles = {
   item: {
     margin: '5px 0',
     padding: 10,
-    border: '1px solid #000'
+    border: '1px solid #000',
+    background: '#fff'
   }
 };
 
