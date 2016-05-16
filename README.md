@@ -26,14 +26,6 @@ Required. Each item in the array must have a unique `id` property. This is used 
 
 **Example**: `{ id: '1', text: 'Item #1', children: [] }`
 
-#### `childrenProperty`
-
-Optional. The property on each `item` which contains an array of children. Defaults to `'children'`.
-
-#### `onUpdate`
-
-Optional. A function invoked with the new array of items whenever an item is dropped in a new location.
-
 #### `renderItem`
 
 Required. A function which returns a React component. Invoiked with an object containing the following properties:
@@ -45,6 +37,18 @@ Property | Definition
 `isPreview` | Whether the item is the preview drag layer.  
 `depth` | The current depth level.  
 `connectDragSource` | Only available if `props.useDragHandle` is set to `true`. Use as specified in the [React DnD docs](https://gaearon.github.io/react-dnd/docs-drag-source-connector.html).
+
+#### `childrenProperty`
+
+Optional. The property on each `item` which contains an array of children. Defaults to `'children'`.
+
+#### `childrenStyle`
+
+Optional. Style object applied to nested `<ol>`s.
+
+#### `onUpdate`
+
+Optional. A function invoked with the new array of items whenever an item is dropped in a new location.
 
 #### `useDragHandle`
 
