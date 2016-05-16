@@ -5,7 +5,7 @@ React DnD reimplementation of the excellent but unmaintained [Nestable jQuery pl
 ## Demos
 
 - [Flat List](http://echenley.github.io/react-dnd-nestable/demos/demo0-flat-list/)
-- [Nested List](http://echenley.github.io/react-dnd-nestable/demos/demo0-nested-list/)
+- [Nested List](http://echenley.github.io/react-dnd-nestable/demos/demo1-nested-list/)
 
 ## What does it look like?
 
