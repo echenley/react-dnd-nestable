@@ -20,21 +20,21 @@ React DnD reimplementation of the excellent but unmaintained [Nestable jQuery pl
 
 ## Props
 
-### `items`
+#### `items`
 
 Required. Each item in the array must have a unique `id` property. This is used to keep track of which item is which. 
 
 **Example**: `{ id: '1', text: 'Item #1', children: [] }`
 
-### `childrenProperty`
+#### `childrenProperty`
 
 Optional. The property on each `item` which contains an array of children. Defaults to `'children'`.
 
-### `onUpdate`
+#### `onUpdate`
 
 Optional. A function invoked with the new array of items whenever an item is dropped in a new location.
 
-### `renderItem`
+#### `renderItem`
 
 Required. A function which returns a React component. Invoiked with an object containing the following properties:
 
@@ -46,14 +46,14 @@ Property | Definition
 `depth` | The current depth level.  
 `connectDragSource` | Only available if `props.useDragHandle` is set to `true`. Use as specified in the [React DnD docs](https://gaearon.github.io/react-dnd/docs-drag-source-connector.html).
 
-### `useDragHandle`
+#### `useDragHandle`
 
 Optional. Set to `true` to specify a drag handle. Otherwise, entire item is draggable. Defaults to `false`.
 
-### `maxDepth`
+#### `maxDepth`
 
 Optional. Maximum item depth. Defaults to `1`.
 
-### `threshold`
+#### `threshold`
 
 Optional. Distance in pixels the cursor must move horizontally before item changes depth. Defaults to `30`.
