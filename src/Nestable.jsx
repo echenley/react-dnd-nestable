@@ -153,6 +153,7 @@ class Nestable extends Component {
         <CustomDragLayer
           renderItem={ renderItem }
           childrenProperty={ childrenProperty }
+          childrenStyle={ childrenStyle }
         />
       </div>
     );

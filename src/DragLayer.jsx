@@ -39,14 +39,14 @@ class CustomDragLayer extends Component {
   }
 
   getChildren = (items, depth) => {
-    const { renderItem, childrenProperty } = this.props;
+    const { renderItem, childrenProperty, childrenStyle } = this.props;
 
     if (!items || !items.length) {
       return null;
     }
 
     return (
-      <ol>
+      <ol style={ childrenStyle }>
         { items.map((item, i) => (
           <li key={ i }>
             { renderItem({ item, isDragging: false, isPreview: true, depth }) }
