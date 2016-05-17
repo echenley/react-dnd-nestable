@@ -28,10 +28,10 @@ Required. Each item in the array must have a unique `id` property. This is used 
 
 #### `renderItem`
 
-Required. A function which returns a React component. Invoiked with an object containing the following properties:
+Required. A function which returns a React component. Invoked with an object containing the following properties:
 
-Property | Definition
--------- | ----------
+Property | Description
+-------- | -----------
 `item` | The item to render.  
 `isDragging` | Whether the item is currently being dragged.  
 `isPreview` | Whether the item is the preview drag layer.  
