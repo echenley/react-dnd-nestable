@@ -14,15 +14,16 @@ const layerStyles = {
   top: 0
 };
 
-function getItemStyles(props, { width, height }) {
+function getItemStyles(props, clientRect) {
   const { initialOffset, currentOffset } = props;
   if (!initialOffset || !currentOffset) {
     return { display: 'none' };
   }
 
   const { x, y } = currentOffset;
-
+  const { width, height } = clientRect;
   const transform = `translate(${x}px, ${y}px)`;
+
   return {
     transform: transform,
     WebkitTransform: transform,
@@ -82,12 +83,12 @@ class CustomDragLayer extends Component {
 }
 
 export default compose(
-  pure,
   DragLayer(monitor => ({
     item: monitor.getItem(),
     itemType: monitor.getItemType(),
     initialOffset: monitor.getInitialSourceClientOffset(),
     currentOffset: monitor.getSourceClientOffset(),
     isDragging: monitor.isDragging()
-  }))
+  })),
+  pure
 )(CustomDragLayer);

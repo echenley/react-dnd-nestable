@@ -14,11 +14,10 @@ class Demo extends Component {
     ]
   };
 
-  renderItem = ({ item }) => {
+  renderItem = ({ item, isPreview }) => {
+    const itemStyles = isPreview ? styles.dragPreview : styles.item;
     return (
-      <div style={ styles.item }>
-        { item.id }
-      </div>
+      <div style={ itemStyles }>{ item.id }</div>
     );
   };
 
@@ -42,6 +41,11 @@ class Demo extends Component {
 var styles = {
   item: {
     margin: '5px 0',
+    padding: 10,
+    border: '1px solid #000',
+    background: '#fff'
+  },
+  dragPreview: {
     padding: 10,
     border: '1px solid #000',
     background: '#fff'

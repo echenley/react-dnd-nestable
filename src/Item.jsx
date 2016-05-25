@@ -14,16 +14,6 @@ const mouse = {
   lastX: 0
 };
 
-function getConflictingIndex(prevPosition, nextPosition) {
-  for (let i = 0; i < prevPosition.length; i++) {
-    if (prevPosition[i] !== nextPosition[i]) {
-      return i;
-    }
-  }
-
-  return false;
-}
-
 function isSamePosition(prevPosition, nextPosition) {
   for (let i = 0; i < prevPosition.length; i++) {
     if (prevPosition[i] !== nextPosition[i]) {
@@ -97,6 +87,7 @@ const cardTarget = {
     const hoverNode = findDOMNode(component);
     // rect for entire component including children
     const hoverBoundingRect = hoverNode.getBoundingClientRect();
+
     // rect for item without children
     const hoverItemBoundingRect = hoverNode.children[0].getBoundingClientRect();
 
@@ -159,15 +150,11 @@ const cardTarget = {
     // get pixels to the top
     const hoverClientY = clientOffset.y - hoverBoundingRect.top;
 
-    // get position of nearest shared parent
-    const conflictingIndex = getConflictingIndex(prevPosition, nextPosition);
-
-    if (
-      nextPosition.length === prevPosition.length &&
-      conflictingIndex === (nextPosition.length - 1)
-    ) {
-      const prevIndex = prevPosition[conflictingIndex];
-      const nextIndex = nextPosition[conflictingIndex];
+    // dragging child item to another position with same parent
+    if (nextPosition.length === prevPosition.length) {
+      const last = nextPosition.length - 1;
+      const prevIndex = prevPosition[last];
+      const nextIndex = nextPosition[last];
 
       // only perform the move when the mouse has crossed half of the items height
       // when dragging downwards, only move when the cursor is below 50%
@@ -180,6 +167,17 @@ const cardTarget = {
 
       // dragging upwards
       if (prevIndex > nextIndex && hoverClientY > hoverMiddleY) {
+        return;
+      }
+    } else if (
+      // dragging child item over parent item
+      nextPosition.length < prevPosition.length &&
+      nextPosition[nextPosition.length - 1] === prevPosition[prevPosition.length - 2]
+    ) {
+      const hoverItemMiddleY = (hoverItemBoundingRect.bottom - hoverItemBoundingRect.top) / 2;
+
+      // cancel if hovering in lower half of parent item
+      if (hoverClientY > hoverItemMiddleY) {
         return;
       }
     }
