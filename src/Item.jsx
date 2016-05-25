@@ -106,8 +106,8 @@ const cardTarget = {
     if (!isOverSelf && clientOffset.y > hoverItemBoundingRect.bottom) {
       return;
     }
-    
-    // set mouse.lastX if it isn't set yet
+
+    // set mouse.lastX if it isn't set yet (first hover event)
     mouse.lastX = mouse.lastX || monitor.getInitialClientOffset().x;
 
     const currMouseX = clientOffset.x;
