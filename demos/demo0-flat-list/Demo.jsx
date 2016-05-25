@@ -16,7 +16,7 @@ class Demo extends Component {
   };
 
   renderItem = ({ item }) => {
-    return <div style={ styles.item }>{ item.id }</div>;
+    return <div style={ styles.item }>{ item.text }</div>;
   };
 
   updateItems = (newItems) => {
