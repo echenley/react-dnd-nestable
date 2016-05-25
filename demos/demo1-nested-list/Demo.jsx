@@ -14,11 +14,8 @@ class Demo extends Component {
     ]
   };
 
-  renderItem = ({ item, isPreview }) => {
-    const itemStyles = isPreview ? styles.dragPreview : styles.item;
-    return (
-      <div style={ itemStyles }>{ item.id }</div>
-    );
+  renderItem = ({ item }) => {
+    return <div style={ styles.item }>{ item.id }</div>;
   };
 
   updateItems = (newItems) => {
@@ -40,12 +37,7 @@ class Demo extends Component {
 
 var styles = {
   item: {
-    margin: '5px 0',
-    padding: 10,
-    border: '1px solid #000',
-    background: '#fff'
-  },
-  dragPreview: {
+    marginBottom: 5,
     padding: 10,
     border: '1px solid #000',
     background: '#fff'
