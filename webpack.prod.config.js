@@ -9,14 +9,14 @@ var path = require('path');
 var config = {
   devtool: 'sourcemap',
   entry: {
-    index: './src/react-motion.js'
+    index: './src/react-dnd-nestable.js'
   },
   output: {
     path: path.join(__dirname, 'build'),
     publicPath: 'build/',
-    filename: 'react-motion.js',
-    sourceMapFilename: 'react-motion.map',
-    library: 'ReactMotion',
+    filename: 'react-dnd-nestable.js',
+    sourceMapFilename: 'react-dnd-nestable.map',
+    library: 'react-dnd-nestable',
     libraryTarget: 'umd'
   },
   module: {
