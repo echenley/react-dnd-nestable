@@ -40,6 +40,7 @@ const cardSource = {
   },
   beginDrag(props, monitor, component) {
     const node = findDOMNode(component);
+
     return {
       id: props.id,
       index: props.index,
@@ -54,6 +55,9 @@ const cardSource = {
 
 const cardTarget = {
   drop(props, monitor) {
+    // clear mouse position
+    mouse.lastX = 0;
+
     if (!monitor.didDrop()) {
       props.dropItem();
     }
@@ -102,12 +106,12 @@ const cardTarget = {
     if (!isOverSelf && clientOffset.y > hoverItemBoundingRect.bottom) {
       return;
     }
+    
+    // set mouse.lastX if it isn't set yet
+    mouse.lastX = mouse.lastX || monitor.getInitialClientOffset().x;
 
     const currMouseX = clientOffset.x;
     const mouseDistanceX = currMouseX - mouse.lastX;
-
-    // set mouse.lastX if it isn't set yet
-    mouse.lastX = mouse.lastX || monitor.getInitialClientOffset().x;
 
     let nextPosition = hoverPosition;
 
