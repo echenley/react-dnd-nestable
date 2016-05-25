@@ -33,7 +33,7 @@ class Demo extends Component {
         renderItem={ this.renderItem }
         onUpdate={ this.updateItems }
         childrenStyle={ styles.children }
-        maxDepth={ 3 }
+        maxDepth={ Infinity }
       />
     );
   }
