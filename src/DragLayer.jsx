@@ -32,6 +32,8 @@ function getItemStyles(props, clientRect) {
   };
 }
 
+const noopConnectDragSource = el => el;
+
 class CustomDragLayer extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.isDragging !== nextProps.isDragging) {
@@ -50,7 +52,13 @@ class CustomDragLayer extends Component {
       <ol style={ childrenStyle }>
         { items.map((item, i) => (
           <li key={ i }>
-            { renderItem({ item, isDragging: false, isPreview: true, depth }) }
+            { renderItem({
+              item,
+              isDragging: false,
+              isPreview: true,
+              depth,
+              connectDragSource: noopConnectDragSource
+            }) }
             { this.getChildren(item[childrenProperty], depth + 1) }
           </li>
         )) }
@@ -74,7 +82,13 @@ class CustomDragLayer extends Component {
     return (
       <div style={ layerStyles }>
         <div style={ getItemStyles(this.props, item.clientRect) }>
-          { renderItem({ item: item.data, isDragging: false, isPreview: true, depth: 1 }) }
+          { renderItem({
+            item: item.data,
+            isDragging: false,
+            isPreview: true,
+            depth: 1,
+            connectDragSource: noopConnectDragSource
+          }) }
           { this.getChildren(item.data[childrenProperty], 2) }
         </div>
       </div>
