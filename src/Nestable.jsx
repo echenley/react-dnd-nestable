@@ -125,8 +125,6 @@ class Nestable extends Component {
       childrenProperty
     });
 
-    console.log('moving')
-
     newItems = update(newItems, removeItem);
     newItems = update(newItems, insertItem);
 
