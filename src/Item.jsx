@@ -24,6 +24,19 @@ function isSamePosition(prevPosition, nextPosition) {
   return true;
 }
 
+function increaseHorizontalLevel(prevPosition, prevIndex) {
+  const nextPosition = prevPosition.slice(0, -1);
+  // append to prevSibling's children
+  nextPosition.push(prevIndex - 1, -1);
+  return nextPosition;
+}
+
+function decreaseHorizontalLevel(prevPosition) {
+  const nextPosition = prevPosition.slice(0, -1);
+  nextPosition[nextPosition.length - 1] += 1;
+  return nextPosition;
+}
+
 const cardSource = {
   isDragging(props, monitor) {
     return props.id === monitor.getItem().id;
@@ -83,31 +96,34 @@ const cardTarget = {
 
     // determine mouse position
     const clientOffset = monitor.getClientOffset();
+    const initialClientOffset = monitor.getInitialClientOffset();
 
     const hoverNode = findDOMNode(component);
     // rect for entire component including children
-    const hoverBoundingRect = hoverNode.getBoundingClientRect();
+    const hoverClientRect = hoverNode.getBoundingClientRect();
 
     // rect for item without children
-    const hoverItemBoundingRect = hoverNode.children[0].getBoundingClientRect();
+    const hoverItemClientRect = hoverNode.children[0].getBoundingClientRect();
 
     const isOverSelf = isSamePosition(prevPosition, hoverPosition);
 
     // cancel if over a nested target that isn't its own child
-    if (!isOverSelf && clientOffset.y > hoverItemBoundingRect.bottom) {
+    if (!isOverSelf && clientOffset.y > hoverItemClientRect.bottom) {
       return;
     }
 
     // set mouse.lastX if it isn't set yet (first hover event)
-    mouse.lastX = mouse.lastX || monitor.getInitialClientOffset().x;
-
+    mouse.lastX = mouse.lastX || initialClientOffset.x;
+    
     const currMouseX = clientOffset.x;
     const mouseDistanceX = currMouseX - mouse.lastX;
+    const nearLeftEdge = currMouseX < (hoverClientRect.left + 10);
 
+    // nextPosition will be overwritten when moving horizontally
     let nextPosition = hoverPosition;
 
     // moving horizontally
-    if (isOverSelf && Math.abs(mouseDistanceX) >= threshold) {
+    if (isOverSelf && (nearLeftEdge || Math.abs(mouseDistanceX) >= threshold)) {
       // reset lastX for new phase
       mouse.lastX = currMouseX;
 
@@ -119,23 +135,18 @@ const cardTarget = {
         // isn't at max depth
         (prevPosition.length + dragDepth - 1) !== maxDepth
       ) {
-        const sharedPosition = prevPosition.slice(0, -1);
-        // append to prevSibling's children
-        sharedPosition.push(prevIndex - 1, -1);
-        nextPosition = sharedPosition;
+        nextPosition = increaseHorizontalLevel(prevPosition, prevIndex);
       }
 
       // decrease horizontal level
       if (
         mouseDistanceX < 0 &&
         // is nested
-        hoverPosition.length > 1 &&
+        prevPosition.length > 1 &&
         // is last item in array
         prevIndex === hoverSiblings.length - 1
       ) {
-        const sharedPosition = prevPosition.slice(0, -1);
-        sharedPosition[sharedPosition.length - 1] += 1;
-        nextPosition = sharedPosition;
+        nextPosition = decreaseHorizontalLevel(prevPosition);
       }
     }
 
@@ -145,10 +156,10 @@ const cardTarget = {
     }
 
     // get vertical middle
-    const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+    const hoverMiddleY = (hoverClientRect.bottom - hoverClientRect.top) / 2;
 
     // get pixels to the top
-    const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+    const hoverClientY = clientOffset.y - hoverClientRect.top;
 
     // dragging child item to another position with same parent
     if (nextPosition.length === prevPosition.length) {
@@ -174,7 +185,7 @@ const cardTarget = {
       nextPosition.length < prevPosition.length &&
       nextPosition[nextPosition.length - 1] === prevPosition[prevPosition.length - 2]
     ) {
-      const hoverItemMiddleY = (hoverItemBoundingRect.bottom - hoverItemBoundingRect.top) / 2;
+      const hoverItemMiddleY = (hoverItemClientRect.bottom - hoverItemClientRect.top) / 2;
 
       // cancel if hovering in lower half of parent item
       if (hoverClientY > hoverItemMiddleY) {
