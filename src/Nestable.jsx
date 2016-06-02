@@ -59,7 +59,7 @@ class Nestable extends Component {
     onUpdate: () => {},
     renderItem: () => { throw new Error('Nestable: You must supply a renderItem prop.'); },
     useDragHandle: false,
-    maxDepth: 1,
+    maxDepth: Infinity,
     threshold: 30
   };
 
@@ -124,6 +124,8 @@ class Nestable extends Component {
       itemsToInsert: [dragItem],
       childrenProperty
     });
+
+    console.log('moving')
 
     newItems = update(newItems, removeItem);
     newItems = update(newItems, insertItem);

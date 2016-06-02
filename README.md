@@ -57,7 +57,7 @@ Optional. Set to `true` to specify a drag handle. Otherwise, entire item is drag
 
 #### `maxDepth`
 
-Optional. Maximum item depth. Defaults to `1`.
+Optional. Maximum item depth. Defaults to `Infinity`.
 
 #### `threshold`
 
