@@ -107,11 +107,6 @@ const cardTarget = {
 
     const isOverSelf = isSamePosition(prevPosition, hoverPosition);
 
-    // cancel if over a nested target that isn't its own child
-    if (!isOverSelf && clientOffset.y > hoverItemClientRect.bottom) {
-      return;
-    }
-
     // set mouse.lastX if it isn't set yet (first hover event)
     mouse.lastX = mouse.lastX || initialClientOffset.x;
     
@@ -191,6 +186,9 @@ const cardTarget = {
       if (hoverClientY > hoverItemMiddleY) {
         return;
       }
+    } else if (!isOverSelf && clientOffset.y > hoverItemClientRect.bottom) {
+      // cancel if over a nested target that isn't its own child
+      return;
     }
 
     // this is where the actual move happens
