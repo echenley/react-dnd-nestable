@@ -17,7 +17,8 @@ var plugins = [
 
 var entry = {
   'demo0-flat-list': './demos/demo0-flat-list/index.jsx',
-  'demo1-nested-list': './demos/demo1-nested-list/index.jsx'
+  'demo1-nested-list': './demos/demo1-nested-list/index.jsx',
+  'demo2-drag-handles': './demos/demo2-drag-handles/index.jsx'
 };
 
 if (process.env.NODE_ENV === 'development') {

@@ -6,6 +6,7 @@ React DnD reimplementation of the excellent but unmaintained [Nestable jQuery pl
 
 - [Flat List](http://echenley.github.io/react-dnd-nestable/demos/demo0-flat-list/)
 - [Nested List](http://echenley.github.io/react-dnd-nestable/demos/demo1-nested-list/)
+- [Drag Handles](http://echenley.github.io/react-dnd-nestable/demos/demo2-drag-handles/)
 
 ## What does it look like?
 
