@@ -1,6 +1,8 @@
 # React DnD Nestable
 
-React DnD reimplementation of the excellent but unmaintained [Nestable jQuery plugin](https://github.com/dbushell/Nestable). This is very much a work in progress, though basic functionality should work. The aim is feature parity with Nestable. Issues/pull requests welcome.
+*Note: this project is unmaintained.*
+
+This was an attempt at a React DnD reimplementation of the excellent but dated [Nestable jQuery plugin](https://github.com/dbushell/Nestable). Basic functionality should work, though feature parity with Nestable was never quite reached.
 
 ## Demos
 
